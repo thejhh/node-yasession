@@ -11,6 +11,7 @@ var foreach = require('snippets').foreach,
 module.exports = (function(req, res, options) {
 	
 	var options = options || {},
+	    _debug = (options.debug === true) ? true : false,
 	    _cookie_name = options.cookie || 'YASESS',
 	    _cookie_dir = path.resolve(options.dir || './tmp/cookies'),
 		_cookie_file_prefix = options.prefix || 'sess',
@@ -68,23 +69,23 @@ module.exports = (function(req, res, options) {
 		
 		if(!filename) throw new TypeError("filename invalid!");
 		
-		util.log("Session: " + sys.inspect(obj));
+		if(_debug) util.log("Session: " + sys.inspect(obj));
 		
 		// Set cookie
-		util.log("Session: Setting cookie...");
+		if(_debug) util.log("Session: Setting cookie...");
 		cookies.set(_cookie_name, id, {'domain':_cookie_domain});
 		
 		// Save the session data to file on end of request
 		req.on('end', function() {
 			if(saved) return;
-			util.log("Session: Saving cookie to file `" + filename + "` on request end...");
+			if(_debug) util.log("Session: Saving cookie to file `" + filename + "` on request end...");
 			_save(obj, filename);
 			saved = true;
 		});
 		
 		req.on('close', function() {
 			if(saved) return;
-			util.log("Session: Saving cookie to file `" + filename + "` on request close...");
+			if(_debug) util.log("Session: Saving cookie to file `" + filename + "` on request close...");
 			_save(obj, filename);
 			saved = true;
 		});
