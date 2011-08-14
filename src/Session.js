@@ -5,7 +5,8 @@ var foreach = require('snippets').foreach,
     fs = require('fs'),
     util = require('util'),
     path = require('path'),
-	Cookies = require('cookies');
+	Cookies = require('cookies'),
+	json = require('json-object').setup(global);
 
 /* Session builder */
 module.exports = (function(req, res, options) {
@@ -35,7 +36,7 @@ module.exports = (function(req, res, options) {
 	/* Load session from file */
 	function _load(id, file) {
 		var file = file || _get_filename(id),
-		    data = JSON.parse(fs.readFileSync(file)),
+		    data = json.parse(fs.readFileSync(file)),
 		    obj = new Session(id);
 		foreach(data).do(function(v, k) {
 			obj[k] = v;
@@ -45,7 +46,7 @@ module.exports = (function(req, res, options) {
 	
 	/* Save session to file */
 	function _save(obj, file) {
-		fs.writeFile(file, JSON.stringify(obj), function(err) {
+		fs.writeFile(file, json.stringify(obj), function(err) {
 			if(err) util.log("Session: Error: Could not write to `" + file + "`: " + err);
 		});
 		return obj;
