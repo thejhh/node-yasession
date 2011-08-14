@@ -14,6 +14,11 @@ standalone.
 Currently the module saves sessions to the filesystem but that should be 
 changed to use some kind of plugable storing method.
 
+PLEASE NOTE: By default this module uses 
+[json-object](https://github.com/jheusala/node-json-object) AND it is poluting 
+standard global objects (hijacking .toJSON() etc). See 
+`options.useStandardJSON` to disable this.
+
 Installation
 ------------
 
@@ -76,4 +81,8 @@ Directory where to save JSON files. Default is `./tmp/cookies`.
 
 By default `yasession` is using 
 [json-object](https://github.com/jheusala/node-json-object) to parse and 
-stringify JSON. This can be changed by turning this option to `false`.
+stringify JSON.
+
+Please note: `json-object` is poluting standard global objects (hijacking .toJSON() etc).
+
+This can be changed by turning this option to `false`.
