@@ -5,8 +5,7 @@ var foreach = require('snippets').foreach,
     fs = require('fs'),
     util = require('util'),
     path = require('path'),
-	Cookies = require('cookies'),
-	json = require('json-object').setup(global);
+	Cookies = require('cookies');
 
 /* Session builder */
 module.exports = (function(req, res, options) {
@@ -16,7 +15,9 @@ module.exports = (function(req, res, options) {
 	    _cookie_name = options.cookie || 'YASESS',
 	    _cookie_dir = path.resolve(options.dir || './tmp/cookies'),
 		_cookie_file_prefix = options.prefix || 'sess',
-	    _cookie_domain = options.domain;
+	    _cookie_domain = options.domain,
+	    useStandardJSON = options.useStandardJSON ? true : false,
+	    json = useStandardJSON ? JSON : require('json-object').setup(global);
 	
 	/* Create unique ID */
 	function _create_id(length) {

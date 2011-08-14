@@ -38,3 +38,40 @@ Example Code
 		
 	}).listen(1337, "127.0.0.1");
 	console.log('Server running at http://127.0.0.1:1337/');
+
+yasession(request, response, options)
+----------------------------
+
+### request
+
+Standard Node.js HTTP/HTTPS request object.
+
+### response
+
+Standard Node.js HTTP/HTTPS response object.
+
+### options.debug
+
+If `true` then additional debug messages are printed with `util.log`. Default is `false`.
+
+### options.cookie
+
+Cookie name. Default is `YASESS`.
+
+### options.domain
+
+Optional domain setting for cookies.
+
+### options.prefix
+
+Prefix for session files. Default is `sess`.
+
+### options.dir
+
+Directory where to save JSON files. Default is `./tmp/cookies`.
+
+### options.useStandardJSON
+
+By default `yasession` is using 
+[json-object](https://github.com/jheusala/node-json-object) to parse and 
+stringify JSON. This can be changed by turning this option to `false`.
