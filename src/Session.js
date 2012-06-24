@@ -1,7 +1,7 @@
 /* Product Catalog */
 
 var foreach = require('snippets').foreach,
-    sys = require('sys'),
+    util = require('util'),
     fs = require('fs'),
     util = require('util'),
     path = require('path'),
@@ -71,7 +71,7 @@ module.exports = (function(req, res, options) {
 		
 		if(!filename) throw new TypeError("filename invalid!");
 		
-		if(_debug) util.log("Session: " + sys.inspect(obj));
+		if(_debug) util.log("Session: " + util.inspect(obj));
 		
 		// Set cookie
 		if(_debug) util.log("Session: Setting cookie...");
