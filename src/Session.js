@@ -66,7 +66,7 @@ module.exports = (function(req, res, options) {
 		    cookie_id = cookies.get(_cookie_name),
 		    id = cookie_id || _create_id(),
 			filename = id && _get_filename(id),
-		    obj = (cookie_id && path.existsSync(filename) ) ? _load(cookie_id, filename) : new Session(id),
+		    obj = (cookie_id && fs.existsSync(filename) ) ? _load(cookie_id, filename) : new Session(id),
 			saved = false;
 		
 		if(!filename) throw new TypeError("filename invalid!");
